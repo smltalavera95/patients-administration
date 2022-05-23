@@ -1,3 +1,6 @@
+import Header from './components/header'
+import Form from './components/Form'
+import PatientsList from './components/PatientsList'
 import { useState } from 'react'
 
 
@@ -5,8 +8,10 @@ function App() {
 
 
   return (
-    <div className="App">
-    
+    <div className="container">
+      <Header/>
+      <Form/>
+      <PatientsList/>
     </div>
   )
 }
