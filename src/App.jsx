@@ -8,10 +8,13 @@ function App() {
 
 
   return (
-    <div className="container">
+    <div className="container mx-auto">
       <Header/>
-      <Form/>
-      <PatientsList/>
+      <div className='mt-12 md:flex container md:mx-20 mx-5'>
+        <Form/>
+        <PatientsList/>
+      </div>
+      
     </div>
   )
 }
