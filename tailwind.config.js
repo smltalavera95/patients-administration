@@ -3,5 +3,16 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function({addComponents}){
+      addComponents({
+        '.container':{
+          maxWidth: '100%',
+          '@screen lg': {
+            maxWidth: '1200px',
+          },
+        }
+      })
+    }
+  ],
 }
