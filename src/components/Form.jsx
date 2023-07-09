@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
+import Error from './Error'
 
-const Form = () => {
+const Form = ({patients, setPatients}) => {
   const [name, setName] = useState('');
   const [owner, setOwner] = useState('');
   const [email, setEmail] = useState('');
@@ -12,11 +13,34 @@ const Form = () => {
   const handleSubmit = (e) =>{
     e.preventDefault()
 
+    //Check if a field is empty
     if([name, owner, email, date, description].includes('')){
       setError(true)
       return
     } 
     setError(false)
+
+    const patientOb = {
+      name,
+      owner,
+      email,
+      date,
+      description
+    }
+
+    //Set the state of patients
+    setPatients([...patients, patientOb])
+
+    //Clean all the values in form
+    cleanValues()
+  }
+
+  const cleanValues = () => {
+    setName('')
+    setOwner('')
+    setEmail('')
+    setDate('')
+    setDescription('')
   }
   return (
     <div className='md:w-1/2 lg:w-2/5 mb-10 mx-10'>
@@ -24,11 +48,7 @@ const Form = () => {
 
         <form onSubmit={handleSubmit} 
         className='bg-white shadow-md rounded-lg p-8'>
-          { error && 
-            <div className='bg-red-600 py-3 px-2 text-white text-center mb-5 rounded-sm'>
-              <p>There are some empty fields</p>
-            </div>
-          }
+          { error && <Error msg='There are some empty fields'/>}
           <div className='mb-5'>
             <input className="border-2 rounded-md w-full p-2 mt-2 placeholder-gray-400" 
             type="text" 
