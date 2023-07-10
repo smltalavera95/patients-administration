@@ -21,6 +21,7 @@ const Form = ({patients, setPatients}) => {
     setError(false)
 
     const patientOb = {
+      id: generateId(),
       name,
       owner,
       email,
@@ -42,13 +43,22 @@ const Form = ({patients, setPatients}) => {
     setDate('')
     setDescription('')
   }
+
+  const generateId = () => {
+    let date = Date.now().toString(36);
+    let random = Math.random().toString(36).substr(2);
+
+    return date + random;
+  }
   return (
     <div className='md:w-1/2 lg:w-2/5 mb-10 mx-10'>
       <h2 className='font-black text-2xl text-center mb-5'>Patient Record</h2>
 
         <form onSubmit={handleSubmit} 
         className='bg-white shadow-md rounded-lg p-8'>
-          { error && <Error msg='There are some empty fields'/>}
+          { error && <Error>
+              <p>There are some empty fields</p>
+            </Error>}
           <div className='mb-5'>
             <input className="border-2 rounded-md w-full p-2 mt-2 placeholder-gray-400" 
             type="text" 
